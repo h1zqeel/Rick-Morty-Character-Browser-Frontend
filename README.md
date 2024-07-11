@@ -1,31 +1,68 @@
-# React + TypeScript + Vite
+# Rick and Morty Character Browser (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Rick and Morty character browser built with React.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ensure you have the following installed:
 
-## Expanding the ESLint configuration
+- Node.js v18 or higher
+- npm (Node Package Manager)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The project was built and tested with Node.js v20.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <project-folder>
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root of the project and add the following:
+   ```
+   GRAPHQL_URL=<server-url>
+   ```
+   Replace `<server-url>` with your GraphQL server URL.
+
+## Building and Running
+
+### Production Build
+
+To build the project for production:
+
+```bash
+npm run build
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# Rick-Morty-Character-Browser-Frontend
+To preview the production build:
+
+```bash
+npm run preview
+```
+
+### Development Server
+
+To start the development server:
+
+```bash
+npm run dev
+```
+
+This will start the Vite development server.
+
+## Available Commands
+
+- `dev`: Starts the Vite development server.
+- `build`: Builds the TypeScript files (`tsc -b`) and then builds the project with Vite.
+- `lint`: Runs ESLint to lint the project files.
+- `lint:fix`: Runs ESLint with the `--fix` option to automatically fix linting issues.
+- `preview`: Previews the production build with Vite.
+- `format`: Formats the TypeScript files using Prettier.
+- `test`: Runs Jest for testing.
