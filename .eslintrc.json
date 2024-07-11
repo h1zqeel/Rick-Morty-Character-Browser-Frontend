@@ -35,6 +35,10 @@
     "react/jsx-no-target-blank": "off",
     "arrow-parens": "off",
     "comma-dangle": "off",
+    "react/function-component-definition": "off",
+    "react/no-unused-prop-types": "off",
+    "operator-linebreak": "off",
+    "object-curly-newline": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -46,7 +50,7 @@
       }
     ]
   },
-  "ignorePatterns": ["node_modules/", "dist/", "vite.config.ts", "src/vite-env.d.ts"],
+  "ignorePatterns": ["node_modules/", "dist/", "vite.config.ts", "tailwind.config.js", "postcss.config.js"],
   "settings": {
     "import/resolver": {
       "typescript": {}

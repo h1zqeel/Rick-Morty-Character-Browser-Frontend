@@ -1,19 +1,17 @@
+/* eslint-disable camelcase */
 import { Chip, Tooltip } from '@mui/material';
+import { Episode } from '../types/Episode';
 
 interface EpirsodeInfoProps {
-  name: string;
-  air_date: string;
-  episode: string;
+  episode: Episode;
 }
 
-const EpisodeInfo = ({ name, air_date, episode }: EpirsodeInfoProps) => {
-  return (
-    <div className="cursor-pointer">
-      <Tooltip title={`Air Date: ${air_date}`}>
-        <Chip label={`${name} - ${episode}`} style={{ margin: 5 }} />
-      </Tooltip>
-    </div>
-  );
-};
+const EpisodeInfo = ({ episode: { air_date, episode, name } }: EpirsodeInfoProps) => (
+  <div className="cursor-pointer">
+    <Tooltip title={`Air Date: ${air_date}`}>
+      <Chip label={`${name} - ${episode}`} style={{ margin: 5 }} />
+    </Tooltip>
+  </div>
+);
 
 export default EpisodeInfo;

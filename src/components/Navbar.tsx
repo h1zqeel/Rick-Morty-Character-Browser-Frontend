@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
-function Navbar({ showBackButton = false }: { showBackButton?: boolean }) {
+function Navbar({ showBackButton = false }: { showBackButton: boolean }) {
   const navigate = useNavigate();
 
   const handleBackClick = () => {

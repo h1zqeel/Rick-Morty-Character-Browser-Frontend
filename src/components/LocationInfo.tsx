@@ -1,14 +1,9 @@
-import React from 'react';
 import Typography from '@mui/material/Typography';
+import { Location } from '../types/Location';
 
 interface LocationInfoProps {
   title: string;
-  location: {
-    name: string;
-    type: string;
-    dimension: string;
-    created: string;
-  };
+  location: Location;
 }
 
 const LocationInfo = ({ title, location }: LocationInfoProps) => {

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useEffect } from 'react';
-import CharacterCard from './CharacterCard';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Pagination from '@mui/material/Pagination';
 import { Link } from 'react-router-dom';
+import CharacterCard from './CharacterCard';
+import { Character } from '../types/Character';
 
 export default function CharacterList() {
   const [page, setPage] = useState(1);
@@ -33,7 +33,7 @@ export default function CharacterList() {
 
   const { loading, data, error, refetch } = useQuery(charactersQuery, {
     variables: {
-      page: page,
+      page,
       filter: {},
     },
   });
@@ -45,7 +45,8 @@ export default function CharacterList() {
     }
   }, [data]);
 
-  const handlePageChange = (event: any, value: number) => {
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    event.preventDefault();
     setPage(value);
   };
 
@@ -54,9 +55,11 @@ export default function CharacterList() {
   }, [page]);
 
   if (error) {
-    return <div className="flex justify-center items-center h-screen">
+    return (
+      <div className="flex justify-center items-center h-screen">
         There was an trying to fetch the data. Please try again later.
-      </div>;
+      </div>
+    );
   }
 
   if (loading) {
@@ -81,21 +84,29 @@ export default function CharacterList() {
         />
       </div>
       <Grid container spacing={2} className="justify-center">
-          {data &&
-            data.characters.results.map((character: any) => (
-              <Grid item xs={8} sm={6} md={5} lg={4} key={character.id} className="flex justify-center">
-                <Link to={`character/${character.id}`}>
-                  <CharacterCard
-                    id={character.id}
-                    name={character.name}
-                    image={character.image}
-                    status={character.status}
-                    species={character.species}
-                  />
-                </Link>
-              </Grid>
-            ))}
-        </Grid>
+        {data &&
+          data.characters.results.map((character: Character) => (
+            <Grid
+              item
+              xs={8}
+              sm={6}
+              md={5}
+              lg={4}
+              key={character.id}
+              className="flex justify-center"
+            >
+              <Link to={`character/${character.id}`}>
+                <CharacterCard
+                  id={character.id}
+                  name={character.name}
+                  image={character.image}
+                  status={character.status}
+                  species={character.species}
+                />
+              </Link>
+            </Grid>
+          ))}
+      </Grid>
     </div>
   );
 }

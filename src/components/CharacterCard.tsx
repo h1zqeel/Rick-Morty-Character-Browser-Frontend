@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Box, CircularProgress } from '@mui/material';
-import { CharacterCardProps } from '../types/Character';
+
+export interface CharacterCardProps {
+  id: number;
+  name: string;
+  image: string;
+  status: string;
+  species: string;
+}
 
 export default function CharacterCard({ name, image, status, species }: CharacterCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
@@ -14,7 +21,15 @@ export default function CharacterCard({ name, image, status, species }: Characte
   };
 
   return (
-    <Card className="cursor-pointer" sx={{ maxWidth: 345, m: 2, boxShadow: 3, borderRadius: 2 }}>
+    <Card
+      className="cursor-pointer"
+      sx={{
+        maxWidth: 345,
+        m: 2,
+        boxShadow: 3,
+        borderRadius: 2,
+      }}
+    >
       <Box position="relative" minHeight={300} minWidth={300}>
         <CardMedia
           component="img"
