@@ -39,6 +39,7 @@
     "react/no-unused-prop-types": "off",
     "operator-linebreak": "off",
     "object-curly-newline": "off",
+    "import/no-extraneous-dependencies": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
