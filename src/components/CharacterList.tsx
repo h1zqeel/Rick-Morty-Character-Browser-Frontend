@@ -6,15 +6,23 @@ import Pagination from '@mui/material/Pagination';
 import { Link } from 'react-router-dom';
 import CharacterCard from './CharacterCard';
 import { Character } from '../types/Character';
+import Filters from './Filters';
+import searchByName from '../helpers';
 
 export default function CharacterList() {
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState('None');
+  const [status, setStatus] = useState(' ');
+  const [species, setSpecies] = useState('');
+  const [name, setName] = useState('');
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [filter, setFilter] = useState({});
   const [totalPages, setTotalPages] = useState(0);
   const charactersPerPage = 20; // FIXED by RickMorty API
 
   const charactersQuery = gql`
-    query Query($page: Int, $filter: CharacterFilter) {
-      characters(page: $page, filter: $filter) {
+    query Query($page: Int, $filter: CharacterFilter, $order: String) {
+      characters(page: $page, filter: $filter, order: $order) {
         info {
           count
           next
@@ -34,7 +42,8 @@ export default function CharacterList() {
   const { loading, data, error, refetch } = useQuery(charactersQuery, {
     variables: {
       page,
-      filter: {},
+      filter,
+      order: sort,
     },
   });
 
@@ -42,6 +51,10 @@ export default function CharacterList() {
     if (data?.characters?.info?.count) {
       const totalPagesCount = Math.ceil(data.characters.info.count / charactersPerPage);
       setTotalPages(totalPagesCount);
+    }
+
+    if (data) {
+      setCharacters(data.characters.results);
     }
   }, [data]);
 
@@ -51,8 +64,16 @@ export default function CharacterList() {
   };
 
   useEffect(() => {
+    if (data) setCharacters(searchByName(data.characters.results, name));
+  }, [name]);
+
+  useEffect(() => {
     refetch();
-  }, [page]);
+  }, [page, filter, sort]);
+
+  useEffect(() => {
+    setFilter({ status, species });
+  }, [status, species]);
 
   if (error) {
     return (
@@ -77,6 +98,18 @@ export default function CharacterList() {
           />
         </div>
         <div className="flex flex-row justify-center">
+          <Filters
+            sort={sort}
+            setSort={setSort}
+            status={status}
+            setStatus={setStatus}
+            species={species}
+            setSpecies={setSpecies}
+            name={name}
+            setName={setName}
+          />
+        </div>
+        <div className="flex flex-row justify-center mt-5">
           <CircularProgress />
         </div>
       </div>
@@ -96,9 +129,21 @@ export default function CharacterList() {
           className="mb-4"
         />
       </div>
+      <div className="flex flex-row justify-center">
+        <Filters
+          sort={sort}
+          setSort={setSort}
+          status={status}
+          setStatus={setStatus}
+          species={species}
+          setSpecies={setSpecies}
+          name={name}
+          setName={setName}
+        />
+      </div>
       <Grid container spacing={2} className="justify-center">
-        {data &&
-          data.characters.results.map((character: Character) => (
+        {!!characters.length &&
+          characters.map((character: Character) => (
             <Grid
               item
               xs={8}
