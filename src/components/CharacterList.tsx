@@ -53,7 +53,7 @@ export default function CharacterList() {
       setTotalPages(totalPagesCount);
     }
 
-    if (data) {
+    if (data && data.characters) {
       setCharacters(data.characters.results);
     }
   }, [data]);
@@ -64,7 +64,7 @@ export default function CharacterList() {
   };
 
   useEffect(() => {
-    if (data) setCharacters(searchByName(data.characters.results, name));
+    if (data && data.characters) setCharacters(searchByName(data.characters.results, name));
   }, [name]);
 
   useEffect(() => {

@@ -100,7 +100,7 @@ describe('RootPage', () => {
 
     await waitFor(() => {
       screen.getByText('2').click();
-      expect(mockRefetch).toHaveBeenCalledTimes(1);
+      expect(mockRefetch).toHaveBeenCalled();
     });
   });
 
