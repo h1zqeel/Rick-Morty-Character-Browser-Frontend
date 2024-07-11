@@ -4,6 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Box, CircularProgress } from '@mui/material';
+import CircleIcon from '@mui/icons-material/Circle';
 
 export interface CharacterCardProps {
   id: number;
@@ -65,6 +66,9 @@ export default function CharacterCard({ name, image, status, species }: Characte
           {name}
         </Typography>
         <Box display="flex" alignItems="center" mb={1}>
+          {status === 'Alive' && <CircleIcon color="success" sx={{ fontSize: '10px' }} />}
+          {status === 'Dead' && <CircleIcon color="error" sx={{ fontSize: '10px' }} />}
+          {status === 'unknown' && <CircleIcon color="disabled" sx={{ fontSize: '10px' }} />}
           <Typography variant="body2" color="text.secondary" ml={1}>
             {status}
           </Typography>

@@ -64,8 +64,21 @@ export default function CharacterList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <CircularProgress />
+      <div className="container mx-auto p-4">
+        <div className="flex flex-row justify-center">
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            shape="rounded"
+            color="primary"
+            size="medium"
+            className="mb-4"
+          />
+        </div>
+        <div className="flex flex-row justify-center">
+          <CircularProgress />
+        </div>
       </div>
     );
   }
