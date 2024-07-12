@@ -72,6 +72,7 @@ export default function CharacterList() {
   }, [page, filter, sort]);
 
   useEffect(() => {
+    setPage(1);
     setFilter({ status, species });
   }, [status, species]);
 
