@@ -45,7 +45,7 @@ const Filters = ({
           onChange={(event) => setSort(event.target.value as string)}
           size="small"
         >
-          <MenuItem value="None">None</MenuItem>
+          <MenuItem value="None">Default</MenuItem>
           <MenuItem value="asc">Ascending</MenuItem>
           <MenuItem value="desc">Descending</MenuItem>
         </Select>
