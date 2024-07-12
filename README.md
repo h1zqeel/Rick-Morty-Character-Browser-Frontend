@@ -16,8 +16,8 @@ The project was built and tested with Node.js v20.
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <project-folder>
+   git clone git@github.com:h1zqeel/Rick-Morty-Character-Browser-Frontend.git
+   cd Rick-Morty-Character-Browser-Frontend
    ```
 
 2. Install dependencies:
